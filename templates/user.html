@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilo Utente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Benvenuto, {{ nome_utente }}!</h1>
+        
+        <div class="user-profile">
+            <h2>Il tuo profilo</h2>
+            <div class="profile-info">
+                <p><strong>Nome:</strong> {{ nome_utente }}</p>
+                <p><strong>Città:</strong> {{ citta if citta else "Non specificata" }}</p>
+                <p><strong>Nazione:</strong> {{ nazione if nazione else "Non specificata" }}</p>
+            </div>
+            
+            <div class="edit-profile">
+                <h3>Modifica profilo</h3>
+                <form action="/update_profile" method="POST">
+                    <input type="hidden" name="user_id" value="{{ utente_id }}">
+                    <input type="hidden" name="user_name" value="{{ nome_utente }}">
+                    <input type="text" name="citta" value="{{ citta }}">
+                    <input type="text" name="nazione" value="{{ nazione }}">
+                    <button type="submit">Aggiorna profilo</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <a href="/logout" class="btn">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
